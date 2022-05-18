@@ -15,15 +15,15 @@ public class TextAnalyzer{
             BufferedReader input = new BufferedReader(new InputStreamReader(url.openStream()));
 
             Boolean printLines = false;
-            String inputLine = input.readLine().replaceAll("\\<.*?>", "");
-            while (inputLine != null) {
+            String inputLine;
+            while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null) {
                 if (inputLine == "The Raven") {
                     printLines = true;
                 }
                 if (inputLine == "*** END OF THE PROJECT GUTENBERG EBOOK THE RAVEN ***") {
                     printLines = false;
                 }
-                while (inputLine != null && printLines == true) {
+                if (printLines == true) {
                     System.out.println(inputLine);
                 }
             }
