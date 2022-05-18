@@ -1,8 +1,9 @@
 /*
-    Author: Stephen Sturges
-    Date: 05/18/2022
-    Description: For the CEN 3024C SDLC Assignment.
-*/
+ * Author.....: Stephen Sturges
+ * Date.......: 05/18/2022
+ * Description: For the CEN 3024C SDLC Assignment.
+ */
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
