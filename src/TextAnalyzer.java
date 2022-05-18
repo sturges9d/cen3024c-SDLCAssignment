@@ -17,7 +17,7 @@ public class TextAnalyzer{
             Boolean printLines = false;
             String inputLine;
             while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null) {
-                if (inputLine == "The Raven") {
+                if (inputLine.equalsIgnoreCase("The Raven")) {
                     printLines = true;
                 }
                 if (inputLine == "*** END OF THE PROJECT GUTENBERG EBOOK THE RAVEN ***") {
@@ -26,6 +26,7 @@ public class TextAnalyzer{
                 if (printLines == true) {
                     System.out.println(inputLine);
                 }
+                System.out.println("No line printed.");
             }
         } catch (Exception e) {
             //TODO: handle exception
