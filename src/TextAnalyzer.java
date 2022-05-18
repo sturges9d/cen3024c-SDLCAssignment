@@ -8,9 +8,9 @@ public class TextAnalyzer{
             URL url = new URL("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
             BufferedReader input = new BufferedReader(new InputStreamReader(url.openStream()));
 
-            String word = input.readLine();
-            while (word != null) {
-                System.out.println(word);
+            String inputLine;
+            while ((inputLine = input.readLine()) != null) {
+                System.out.println(inputLine);
             }
         } catch (Exception e) {
             //TODO: handle exception
