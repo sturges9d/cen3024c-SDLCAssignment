@@ -14,13 +14,23 @@ public class TextAnalyzer{
             URL url = new URL("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
             BufferedReader input = new BufferedReader(new InputStreamReader(url.openStream()));
 
-            String inputLine;
-            while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null) {
-                System.out.println(inputLine);
+            Boolean printLines = false;
+            String inputLine = input.readLine().replaceAll("\\<.*?>", "");
+            while (inputLine != null) {
+                if (inputLine == "The Raven") {
+                    printLines = true;
+                }
+                if (inputLine == "*** END OF THE PROJECT GUTENBERG EBOOK THE RAVEN ***") {
+                    printLines = false;
+                }
+                while (inputLine != null && printLines == true) {
+                    System.out.println(inputLine);
+                }
             }
         } catch (Exception e) {
             //TODO: handle exception
             System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 }
