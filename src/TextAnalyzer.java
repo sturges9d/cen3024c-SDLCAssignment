@@ -31,7 +31,6 @@ public class TextAnalyzer{
             }
         } catch (Exception e) {
             //TODO: handle exception
-            System.out.println("Something went wrong.");
             e.printStackTrace();
         }
     }
