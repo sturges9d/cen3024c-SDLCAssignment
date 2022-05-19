@@ -15,18 +15,19 @@ public class TextAnalyzer{
             BufferedReader input = new BufferedReader(new InputStreamReader(url.openStream()));
 
             Boolean printLines = false;
+            Boolean readInput = true;
             String inputLine;
-            while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null) {
+            while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null && readInput) {
                 if (inputLine.equalsIgnoreCase("The Raven")) {
                     printLines = true;
                 }
-                if (inputLine == "*** END OF THE PROJECT GUTENBERG EBOOK THE RAVEN ***") {
+                if (inputLine.equalsIgnoreCase("*** END OF THE PROJECT GUTENBERG EBOOK THE RAVEN ***")) {
                     printLines = false;
+                    readInput = false;
                 }
                 if (printLines == true) {
                     System.out.println(inputLine);
                 }
-                System.out.println("No line printed.");
             }
         } catch (Exception e) {
             //TODO: handle exception
