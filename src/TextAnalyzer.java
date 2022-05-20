@@ -34,12 +34,18 @@ public class TextAnalyzer{
                 if (printLines == true) {
                     System.out.println(inputLine);
                     if (inputLine.replaceAll("\\<.*?>", "") != "") {
-                        textToAnalyze.add(inputLine);
+                        textToAnalyze.add(inputLine.trim());
                     }
                 }
             }
-            System.out.println("Array Contents: " + textToAnalyze);
-            System.out.println("Selected Array Contents: " + textToAnalyze.get(0));
+            for (int i = 0; i < textToAnalyze.size(); i++) {
+                System.out.println("Array Contents: Element: " + i + ", " + textToAnalyze.get(i));
+            }
+            System.out.println("Selected Array Contents: " + textToAnalyze.get(15));
+            String[] lines = textToAnalyze.get(15).split(" |&mdash|;");
+            for (int i = 0; i < lines.length; i++) {
+                System.out.println("Lines Array Element: " + i + ", " + lines[i]);
+            }
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
