@@ -8,6 +8,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 public class TextAnalyzer{
     public static void main(String[] args) {
@@ -57,7 +62,7 @@ public class TextAnalyzer{
             System.out.println("Selected Array Element: " + indexToDisplay + ", Contents: " + textToAnalyze.get(indexToDisplay));
 
             // Count the number of occurances of a word in the ArrayList of text from the URL.
-            ArrayList<String> results = new ArrayList<String>();
+            Map<String, Integer> results = new HashMap<>();
             for (int i = 0; i < textToAnalyze.size(); i++) {
                 int wordCount = 0;
                 String word = textToAnalyze.get(i);
@@ -67,14 +72,17 @@ public class TextAnalyzer{
                         textToAnalyze.remove(j);
                     }
                 }
-                results.add(word + ", " + wordCount);
+                results.put(word, wordCount);
                 wordCount = 0;
             }
 
-            // Display the results ArrayList.
-            for (String string : results) {
-                System.out.println(string);
+            // Display the results TreeMap.
+            TreeMap<String, Integer> sortedResults = new TreeMap<>();
+            sortedResults.putAll(results);
+            for (Map.Entry<String, Integer> entry : sortedResults.entrySet()) {
+                System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
             }
+
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
