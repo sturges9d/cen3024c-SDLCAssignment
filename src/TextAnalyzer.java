@@ -8,9 +8,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
@@ -62,7 +66,7 @@ public class TextAnalyzer{
             System.out.println("Selected Array Element: " + indexToDisplay + ", Contents: " + textToAnalyze.get(indexToDisplay));
 
             // Count the number of occurances of a word in the ArrayList of text from the URL.
-            Map<String, Integer> results = new HashMap<>();
+            HashMap<String, Integer> results = new HashMap<>();
             for (int i = 0; i < textToAnalyze.size(); i++) {
                 int wordCount = 0;
                 String word = textToAnalyze.get(i);
@@ -76,12 +80,44 @@ public class TextAnalyzer{
                 wordCount = 0;
             }
 
-            // Display the results TreeMap.
-            TreeMap<String, Integer> sortedResults = new TreeMap<>();
-            sortedResults.putAll(results);
-            for (Map.Entry<String, Integer> entry : sortedResults.entrySet()) {
-                System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            // Output the HashMap sorted on the values.
+            Set<Entry<String, Integer>> entries = results.entrySet();
+
+            for (Entry<String,Integer> entry : entries) {
+                System.out.println(entry.getKey() + " ==> " + entry.getValue());
             }
+
+            Comparator<Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String,Integer>>() {
+                public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
+                    Integer v1 = e1.getValue();
+                    Integer v2 = e2.getValue();
+                    return v1.compareTo(v2);
+                }
+            };
+
+            List<Entry<String, Integer>> listOfEntries = new ArrayList<Entry<String, Integer>>(entries);
+
+            Collections.sort(listOfEntries, valueComparator);
+
+            LinkedHashMap<String, Integer> sortedByValue = new LinkedHashMap<String, Integer>(listOfEntries.size());
+
+            for (Entry<String,Integer> entry : listOfEntries) {
+                sortedByValue.put(entry.getKey(), entry.getValue());
+            }
+
+            System.out.println("HashMap after sorting entries by values.");
+            Set<Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
+
+            for(Entry<String, Integer> mapping : entrySetSortedByValue) {
+                System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
+            }
+
+            // Display the results TreeMap sorted on the Keys.
+            // TreeMap<String, Integer> sortedResults = new TreeMap<>();
+            // sortedResults.putAll(results);
+            // for (Map.Entry<String, Integer> entry : sortedResults.entrySet()) {
+            //     System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            // }
 
         } catch (Exception e) {
             //TODO: handle exception
