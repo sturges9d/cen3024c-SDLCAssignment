@@ -35,7 +35,11 @@ public class TextAnalyzer{
                 }
                 if (printLines == true && emptyLine == false) {
                     System.out.println(inputLine);
-                    textToAnalyze.add(inputLine.trim().toLowerCase());
+                    String outputTextArray[] = inputLine.split("&mdash|[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]");
+                    for (int i = 0; i < outputTextArray.length; i++) {
+                        textToAnalyze.add(outputTextArray[i]);
+                    }
+                    // textToAnalyze.add(inputLine.trim().toLowerCase());
                 }
             }
             for (int i = 0; i < textToAnalyze.size(); i++) {
