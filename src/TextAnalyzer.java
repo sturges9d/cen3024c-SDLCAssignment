@@ -15,7 +15,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.Map.Entry;
 
 public class TextAnalyzer{
@@ -87,11 +86,12 @@ public class TextAnalyzer{
                 System.out.println(entry.getKey() + " ==> " + entry.getValue());
             }
 
+            // Custom comparator used to reverse the values in the HashMap.
             Comparator<Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String,Integer>>() {
                 public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
                     Integer v1 = e1.getValue();
                     Integer v2 = e2.getValue();
-                    return v1.compareTo(v2);
+                    return v2.compareTo(v1);
                 }
             };
 
