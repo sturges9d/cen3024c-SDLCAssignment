@@ -20,7 +20,7 @@ public class TextAnalyzer{
             Boolean emptyLine = false;
             ArrayList<String> textToAnalyze = new ArrayList<String>();
             String inputLine;
-            while ((inputLine = input.readLine().replaceAll("\\<.*?>", "")) != null && readInput) {
+            while ((inputLine = input.readLine().replaceAll("<[^>]*>", "").replaceAll("’", "'")) != null && readInput) {
                 if (inputLine.equalsIgnoreCase("The Raven")) {
                     printLines = true;
                 }
@@ -35,26 +35,26 @@ public class TextAnalyzer{
                 }
                 if (printLines == true && emptyLine == false) {
                     System.out.println(inputLine);
-                    String outputTextArray[] = inputLine.split("&mdash|[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ']");
+                    // String outputTextArray[] = inputLine.split("&mdash|[^a-z[A-Z]]");
+                    String outputTextArray[] = inputLine.split("&mdash|[^’'a-z[A-Z]]");
                     for (int i = 0; i < outputTextArray.length; i++) {
                         if (!outputTextArray[i].isEmpty()) {
-                            textToAnalyze.add(outputTextArray[i]);
+                            textToAnalyze.add(outputTextArray[i].trim().toLowerCase());
                         }
                     }
-                    // textToAnalyze.add(inputLine.trim().toLowerCase());
                 }
             }
             for (int i = 0; i < textToAnalyze.size(); i++) {
                 System.out.println("ArrayList Element: " + i + ", " + textToAnalyze.get(i));
             }
-            int indexToDisplay = 1;
-            System.out.println("Selected Array Contents: " + textToAnalyze.get(indexToDisplay));
-            String[] lines = textToAnalyze.get(indexToDisplay).split("&mdash|[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ']");
-            for (int i = 0; i < lines.length; i++) {
-                if (!lines[i].isEmpty()) {
-                    System.out.println("Lines Array Element: " + i + ", " + lines[i]);
-                }
-            }
+            int indexToDisplay = 1071;
+            System.out.println("Selected Array Element: " + indexToDisplay + ", Contents: " + textToAnalyze.get(indexToDisplay));
+            // String[] lines = textToAnalyze.get(indexToDisplay).split("&mdash|[^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]");
+            // for (int i = 0; i < lines.length; i++) {
+            //     if (!lines[i].isEmpty()) {
+            //         System.out.println("Lines Array Element: " + i + ", " + lines[i]);
+            //     }
+            // }
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
