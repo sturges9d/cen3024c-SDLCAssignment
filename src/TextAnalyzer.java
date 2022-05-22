@@ -98,7 +98,7 @@ public class TextAnalyzer{
             }
 
             // Display the results.
-            System.out.println("List of words used in \"The Raven\" sorted by their number of occurances.");
+            System.out.println("Top 20 most used words in \"The Raven.\"");
             Set<Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
             int i = 0;
             for(Entry<String, Integer> mapping : entrySetSortedByValue) {
