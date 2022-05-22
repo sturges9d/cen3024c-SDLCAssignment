@@ -47,7 +47,6 @@ public class TextAnalyzer{
                 }
                 // Splits the String lines into string words and places them into the textToAnalyze array.
                 if (printLines == true && emptyLine == false) {
-                    System.out.println(inputLine);
                     String outputTextArray[] = inputLine.split("&mdash|[^’'a-z[A-Z]]");
                     for (int i = 0; i < outputTextArray.length; i++) {
                         if (!outputTextArray[i].isEmpty()) {
@@ -56,15 +55,8 @@ public class TextAnalyzer{
                     }
                 }
             }
-            // Display Index of element and it's contents for debugging purposes.
-            for (int i = 0; i < textToAnalyze.size(); i++) {
-                System.out.println("ArrayList Element: " + i + ", " + textToAnalyze.get(i));
-            }
-            // Display a selected index's content for debugging purposes.
-            int indexToDisplay = 69;
-            System.out.println("Selected Array Element: " + indexToDisplay + ", Contents: " + textToAnalyze.get(indexToDisplay));
 
-            // Count the number of occurances of a word in the ArrayList of text from the URL.
+            // Count the number of occurances of a word in the ArrayList of text from the URL and store the word and its number of occurances in a HashMap.
             HashMap<String, Integer> results = new HashMap<>();
             for (int i = 0; i < textToAnalyze.size(); i++) {
                 int wordCount = 0;
@@ -79,12 +71,8 @@ public class TextAnalyzer{
                 wordCount = 0;
             }
 
-            // Output the HashMap sorted on the values.
-            Set<Entry<String, Integer>> entries = results.entrySet();
-
-            for (Entry<String,Integer> entry : entries) {
-                System.out.println(entry.getKey() + " ==> " + entry.getValue());
-            }
+            // Place all the entries from the results HashMap into a Set.
+            Set<Entry<String, Integer>> resultsSet = results.entrySet();
 
             // Custom comparator used to reverse the values in the HashMap.
             Comparator<Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String,Integer>>() {
@@ -95,32 +83,30 @@ public class TextAnalyzer{
                 }
             };
 
-            List<Entry<String, Integer>> listOfEntries = new ArrayList<Entry<String, Integer>>(entries);
+            // Create a new ArrayList from the Set.
+            List<Entry<String, Integer>> listOfEntries = new ArrayList<Entry<String, Integer>>(resultsSet);
 
+            // Sort the ArrayList using the custom comparator.
             Collections.sort(listOfEntries, valueComparator);
 
+            // Create a new LinkedHashMap to store the values from the sorted ArrayList.
             LinkedHashMap<String, Integer> sortedByValue = new LinkedHashMap<String, Integer>(listOfEntries.size());
 
+            // Place the key and value pairs into the new LinkedHashMap.
             for (Entry<String,Integer> entry : listOfEntries) {
                 sortedByValue.put(entry.getKey(), entry.getValue());
             }
 
-            System.out.println("HashMap after sorting entries by values.");
+            // Display the results.
+            System.out.println("List of words used in \"The Raven\" sorted by their number of occurances.");
             Set<Entry<String, Integer>> entrySetSortedByValue = sortedByValue.entrySet();
-
+            int i = 0;
             for(Entry<String, Integer> mapping : entrySetSortedByValue) {
-                System.out.println(mapping.getKey() + " ==> " + mapping.getValue());
+                i++;
+                System.out.println(i + ". " + mapping.getKey() + ", " + mapping.getValue());
             }
 
-            // Display the results TreeMap sorted on the Keys.
-            // TreeMap<String, Integer> sortedResults = new TreeMap<>();
-            // sortedResults.putAll(results);
-            // for (Map.Entry<String, Integer> entry : sortedResults.entrySet()) {
-            //     System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-            // }
-
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
         }
     }
