@@ -71,9 +71,6 @@ public class TextAnalyzer{
                 wordCount = 0;
             }
 
-            // Place all the entries from the results HashMap into a Set.
-            Set<Entry<String, Integer>> resultsSet = results.entrySet();
-
             // Custom comparator to order the values (occurances) from greatest to least.
             Comparator<Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String,Integer>>() {
                 public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
@@ -89,6 +86,9 @@ public class TextAnalyzer{
                     }
                 }
             };
+            
+            // Place all the entries from the results HashMap into a Set.
+            Set<Entry<String, Integer>> resultsSet = results.entrySet();
 
             // Create a new ArrayList from the Set.
             List<Entry<String, Integer>> listOfEntries = new ArrayList<Entry<String, Integer>>(resultsSet);
@@ -111,6 +111,10 @@ public class TextAnalyzer{
             for(Entry<String, Integer> mapping : entrySetSortedByValue) {
                 i++;
                 System.out.println(i + ". " + mapping.getKey() + ", " + mapping.getValue());
+                // Stop the list at 20 entries.
+                if (i == 20) {
+                    break;
+                }
             }
 
         } catch (Exception e) {
